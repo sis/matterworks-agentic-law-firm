@@ -1,0 +1,30 @@
+{
+  "projectName": "agentic-law-firm",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "pnpm",
+  "includeExamples": true,
+  "tailwind": true,
+  "addOnOptions": {},
+  "envVarValues": {
+    "VITE_CLERK_PUBLISHABLE_KEY": "pk_test_ZGlzY3JldGUtYmVhci00Ny5jbGVyay5hY2NvdW50cy5kZXYk",
+    "CONVEX_DEPLOYMENT": "befitting-falcon-427",
+    "VITE_CONVEX_URL": "https://befitting-falcon-427.convex.cloud"
+  },
+  "git": true,
+  "install": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "biome",
+    "nitro",
+    "clerk",
+    "convex",
+    "sentry",
+    "shadcn",
+    "storybook",
+    "tanstack-query",
+    "form"
+  ]
+}
