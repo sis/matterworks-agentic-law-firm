@@ -7,8 +7,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import AppShell from "../components/app-shell";
 import AuthGate from "../integrations/clerk/auth-gate";
 import ClerkProvider from "../integrations/clerk/provider";
 import ConvexProvider from "../integrations/convex/provider";
@@ -58,9 +57,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<ClerkProvider>
 					<ConvexProvider client={convexQueryClient.convexClient}>
 						<AuthGate>
-							<Header />
-							{children}
-							<Footer />
+							<AppShell>{children}</AppShell>
 							<TanStackDevtools
 								config={{
 									position: "bottom-right",
