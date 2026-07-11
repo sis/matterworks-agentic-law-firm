@@ -8,6 +8,8 @@
  * @module
  */
 
+import type * as matters from "../matters.js";
+import type * as orders from "../orders.js";
 import type * as todos from "../todos.js";
 import type * as users from "../users.js";
 
@@ -18,6 +20,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  matters: typeof matters;
+  orders: typeof orders;
   todos: typeof todos;
   users: typeof users;
 }>;

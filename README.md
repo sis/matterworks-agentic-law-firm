@@ -114,6 +114,7 @@ For server-side checks (route loaders, server functions), see the Clerk docs on 
 
 - Set the `VITE_CONVEX_URL` and `CONVEX_DEPLOYMENT` environment variables in your `.env.local`. (Or run `pnpm dlx convex init` to set them automatically.)
 - Run `pnpm dlx convex dev` to start the Convex server.
+- Set `AI_GATEWAY_API_KEY` in the Convex deployment environment to enable AI SDK document triage. Optionally set `INTAKE_ANALYSIS_MODEL` to swap models, for example `openai/gpt-5.5` or `anthropic/claude-sonnet-4.6`. Without gateway credentials, document intake uses deterministic fallback suggestions.
 
 
 ## Shadcn

@@ -1,7 +1,7 @@
 import { convexQuery } from "@convex-dev/react-query";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Info, Scale } from "lucide-react";
+import { FilePlus2, Home, Info, Scale } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -19,6 +19,7 @@ import { api } from "../../convex/_generated/api";
 
 const navItems = [
 	{ title: "Home", to: "/", icon: Home },
+	{ title: "New Request", to: "/new-request", icon: FilePlus2 },
 	{ title: "About", to: "/about", icon: Info },
 ] as const;
 
