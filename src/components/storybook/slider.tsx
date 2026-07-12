@@ -26,14 +26,11 @@ export const Slider: React.FC<SliderProps> = ({
 	return (
 		<div className={`flex flex-col gap-2 ${className}`}>
 			<div className="flex justify-between items-center">
-				<label
-					htmlFor={id}
-					className="text-sm font-medium text-[var(--sea-ink)]"
-				>
+				<label htmlFor={id} className="text-sm font-medium text-foreground">
 					{label}
 				</label>
 				{showValue && (
-					<span className="min-w-12 text-right text-sm font-semibold text-[var(--lagoon-deep)]">
+					<span className="min-w-12 text-right text-sm font-semibold text-primary">
 						{value}
 					</span>
 				)}
@@ -46,7 +43,7 @@ export const Slider: React.FC<SliderProps> = ({
 				min={min}
 				max={max}
 				step={step}
-				className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-[var(--chip-bg)] accent-[var(--lagoon-deep)]"
+				className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary"
 			/>
 			<div className="demo-muted flex justify-between text-xs">
 				<span>{min}</span>

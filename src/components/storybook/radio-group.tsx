@@ -24,9 +24,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 }) => {
 	return (
 		<fieldset className={`flex flex-col gap-3 ${className}`}>
-			<legend className="text-sm font-medium text-[var(--sea-ink)]">
-				{label}
-			</legend>
+			<legend className="text-sm font-medium text-foreground">{label}</legend>
 			<div className="flex gap-4">
 				{options.map((option) => (
 					<label
@@ -39,9 +37,9 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 							value={option.value}
 							checked={value === option.value}
 							onChange={(e) => onChange?.(e.target.value)}
-							className="h-4 w-4 cursor-pointer accent-[var(--lagoon-deep)]"
+							className="h-4 w-4 cursor-pointer accent-primary"
 						/>
-						<span className="demo-muted text-sm transition-colors group-hover:text-[var(--sea-ink)]">
+						<span className="demo-muted text-sm transition-colors group-hover:text-foreground">
 							{option.label}
 						</span>
 					</label>

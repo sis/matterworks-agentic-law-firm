@@ -19,7 +19,7 @@ import { Textarea } from "#/components/ui/textarea";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 
-export const Route = createFileRoute("/new-request")({
+export const Route = createFileRoute("/_app/new-request")({
 	component: NewRequest,
 });
 

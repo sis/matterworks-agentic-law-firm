@@ -7,8 +7,6 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import AppShell from "../components/app-shell";
-import AuthGate from "../integrations/clerk/auth-gate";
 import ClerkProvider from "../integrations/clerk/provider";
 import ConvexProvider from "../integrations/convex/provider";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
@@ -53,24 +51,22 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<script>{THEME_INIT_SCRIPT}</script>
 				<HeadContent />
 			</head>
-			<body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
+			<body className="font-sans antialiased">
 				<ClerkProvider>
 					<ConvexProvider client={convexQueryClient.convexClient}>
-						<AuthGate>
-							<AppShell>{children}</AppShell>
-							<TanStackDevtools
-								config={{
-									position: "bottom-right",
-								}}
-								plugins={[
-									{
-										name: "Tanstack Router",
-										render: <TanStackRouterDevtoolsPanel />,
-									},
-									TanStackQueryDevtools,
-								]}
-							/>
-						</AuthGate>
+						{children}
+						<TanStackDevtools
+							config={{
+								position: "bottom-right",
+							}}
+							plugins={[
+								{
+									name: "Tanstack Router",
+									render: <TanStackRouterDevtoolsPanel />,
+								},
+								TanStackQueryDevtools,
+							]}
+						/>
 					</ConvexProvider>
 				</ClerkProvider>
 				<Scripts />

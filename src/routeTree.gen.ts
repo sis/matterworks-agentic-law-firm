@@ -9,86 +9,133 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as NewRequestRouteImport } from './routes/new-request'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as TechnicalVisionRouteImport } from './routes/technical-vision'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppNewRequestRouteImport } from './routes/_app.new-request'
+import { Route as AppAboutRouteImport } from './routes/_app.about'
 
-const NewRequestRoute = NewRequestRouteImport.update({
-  id: '/new-request',
-  path: '/new-request',
+const TechnicalVisionRoute = TechnicalVisionRouteImport.update({
+  id: '/technical-vision',
+  path: '/technical-vision',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNewRequestRoute = AppNewRequestRouteImport.update({
+  id: '/new-request',
+  path: '/new-request',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAboutRoute = AppAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/new-request': typeof NewRequestRoute
+  '/': typeof AppIndexRoute
+  '/technical-vision': typeof TechnicalVisionRoute
+  '/about': typeof AppAboutRoute
+  '/new-request': typeof AppNewRequestRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/new-request': typeof NewRequestRoute
+  '/technical-vision': typeof TechnicalVisionRoute
+  '/about': typeof AppAboutRoute
+  '/new-request': typeof AppNewRequestRoute
+  '/': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/new-request': typeof NewRequestRoute
+  '/_app': typeof AppRouteWithChildren
+  '/technical-vision': typeof TechnicalVisionRoute
+  '/_app/about': typeof AppAboutRoute
+  '/_app/new-request': typeof AppNewRequestRoute
+  '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/new-request'
+  fullPaths: '/' | '/technical-vision' | '/about' | '/new-request'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/new-request'
-  id: '__root__' | '/' | '/about' | '/new-request'
+  to: '/technical-vision' | '/about' | '/new-request' | '/'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/technical-vision'
+    | '/_app/about'
+    | '/_app/new-request'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  NewRequestRoute: typeof NewRequestRoute
+  AppRoute: typeof AppRouteWithChildren
+  TechnicalVisionRoute: typeof TechnicalVisionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/new-request': {
-      id: '/new-request'
-      path: '/new-request'
-      fullPath: '/new-request'
-      preLoaderRoute: typeof NewRequestRouteImport
+    '/technical-vision': {
+      id: '/technical-vision'
+      path: '/technical-vision'
+      fullPath: '/technical-vision'
+      preLoaderRoute: typeof TechnicalVisionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/new-request': {
+      id: '/_app/new-request'
+      path: '/new-request'
+      fullPath: '/new-request'
+      preLoaderRoute: typeof AppNewRequestRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/about': {
+      id: '/_app/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AppAboutRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppAboutRoute: typeof AppAboutRoute
+  AppNewRequestRoute: typeof AppNewRequestRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAboutRoute: AppAboutRoute,
+  AppNewRequestRoute: AppNewRequestRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  NewRequestRoute: NewRequestRoute,
+  AppRoute: AppRouteWithChildren,
+  TechnicalVisionRoute: TechnicalVisionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

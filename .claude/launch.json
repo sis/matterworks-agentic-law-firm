@@ -1,0 +1,21 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "dev",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": [
+				"exec",
+				"dotenv",
+				"-e",
+				".env.local",
+				"--",
+				"vite",
+				"dev",
+				"--port",
+				"3100"
+			],
+			"port": 3100
+		}
+	]
+}
