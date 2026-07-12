@@ -281,9 +281,7 @@ function PrinciplesSection() {
 							<span className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
 								Principle {index + 1}
 							</span>
-							<h3 className="mt-1 text-lg font-semibold">
-								{principle.title}
-							</h3>
+							<h3 className="mt-1 text-lg font-semibold">{principle.title}</h3>
 							<p className="mt-2 text-base text-foreground/80">
 								{principle.description}
 							</p>
