@@ -21,7 +21,6 @@ import {
 	Zap,
 } from "lucide-react";
 import { useState } from "react";
-import ThemeToggle from "#/components/ThemeToggle";
 import Threads from "#/components/ui/threads";
 
 export const Route = createFileRoute("/technical-vision")({
@@ -454,7 +453,7 @@ function TechnicalVision() {
 				distance={0.35}
 				className="pointer-events-none absolute inset-0 z-0 opacity-15 dark:opacity-25"
 			/>
-			<header className="relative z-10 border-b bg-background/80 backdrop-blur">
+			<header className="relative z-10 bg-background/80 backdrop-blur">
 				<div className="flex h-20 items-center gap-3 px-4 sm:px-6 lg:h-24 lg:px-12">
 					<Link to="/technical-vision" className="flex items-center gap-2">
 						<div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -462,9 +461,6 @@ function TechnicalVision() {
 						</div>
 						<span className="text-sm font-semibold">MatterWorks</span>
 					</Link>
-					<div className="ml-auto flex items-center gap-2">
-						<ThemeToggle />
-					</div>
 				</div>
 			</header>
 
