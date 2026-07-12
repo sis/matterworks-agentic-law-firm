@@ -1,19 +1,27 @@
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
-
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 import viteReact from "@vitejs/plugin-react";
-import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
 const config = defineConfig({
 	resolve: { tsconfigPaths: true },
 	plugins: [
 		devtools(),
-		nitro({ rollupConfig: { external: [/^@sentry\//] } }),
+		tanstackRouter({
+			target: "react",
+			tmpDir: ".tanstack/router-spa-tmp",
+			routeTreeFileFooter: [
+				"import type { getRouter } from './router.tsx'",
+				"declare module '@tanstack/react-router' {",
+				"  interface Register {",
+				"    router: ReturnType<typeof getRouter>",
+				"  }",
+				"}",
+			],
+		}),
 		tailwindcss(),
-		tanstackStart(),
 		viteReact(),
 	],
 });

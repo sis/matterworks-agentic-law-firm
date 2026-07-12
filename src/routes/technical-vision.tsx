@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import ThemeToggle from "#/components/ThemeToggle";
+import Threads from "#/components/ui/threads";
 
 export const Route = createFileRoute("/technical-vision")({
 	component: TechnicalVision,
@@ -445,9 +446,16 @@ function TechnicalVision() {
 	const ActiveSection = sectionContent[active];
 
 	return (
-		<div className="flex h-svh flex-col bg-background text-foreground">
-			<header className="z-10 border-b bg-background/80 backdrop-blur">
-				<div className="flex h-14 items-center gap-3 px-4 sm:px-6 lg:px-12">
+		<div className="relative flex h-svh flex-col overflow-hidden bg-background text-foreground">
+			<Threads
+				aria-hidden="true"
+				color={[0.25, 0.33, 0.9]}
+				amplitude={0.85}
+				distance={0.35}
+				className="pointer-events-none absolute inset-0 z-0 opacity-15 dark:opacity-25"
+			/>
+			<header className="relative z-10 border-b bg-background/80 backdrop-blur">
+				<div className="flex h-20 items-center gap-3 px-4 sm:px-6 lg:h-24 lg:px-12">
 					<Link to="/technical-vision" className="flex items-center gap-2">
 						<div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
 							<Scale className="size-4" />
@@ -460,7 +468,7 @@ function TechnicalVision() {
 				</div>
 			</header>
 
-			<main className="min-h-0 w-full flex-1">
+			<main className="relative z-10 min-h-0 w-full flex-1">
 				<div className="grid h-full grid-rows-[auto_1fr] lg:grid-cols-[minmax(320px,440px)_1fr] lg:grid-rows-1">
 					<div className="px-4 pt-12 sm:px-6 sm:pt-16 lg:pl-12 lg:pr-8">
 						<h1 className="text-3xl font-bold tracking-tight">

@@ -1,3 +1,12 @@
 {
-  "target": "react"
+  "target": "react",
+  "tmpDir": ".tanstack/router-spa-tmp",
+  "routeTreeFileFooter": [
+    "import type { getRouter } from './router.tsx'",
+    "declare module '@tanstack/react-router' {",
+    "  interface Register {",
+    "    router: ReturnType<typeof getRouter>",
+    "  }",
+    "}"
+  ]
 }
