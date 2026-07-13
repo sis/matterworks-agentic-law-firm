@@ -1,4 +1,3 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import {
 	AppWindow,
 	ArrowDown,
@@ -20,22 +19,7 @@ import {
 	Send,
 	Zap,
 } from "lucide-react";
-import { useState } from "react";
-import Threads from "#/components/ui/threads";
-
-export const Route = createFileRoute("/technical-vision")({
-	component: TechnicalVision,
-	head: () => ({
-		meta: [
-			{ title: "Agentic Law Firm — Technical Vision" },
-			{
-				name: "description",
-				content:
-					"The vision for the Agentic Law Firm platform: a north star for feature development and an explainer for people in the business.",
-			},
-		],
-	}),
-});
+import Threads from "../ui/threads";
 
 const principles = [
 	{
@@ -216,17 +200,7 @@ const timeProtections = [
 	},
 ];
 
-const sections = [
-	{ id: "overview", number: "01", label: "Overview" },
-	{ id: "principles", number: "02", label: "Principles" },
-	{ id: "flow", number: "03", label: "The Flow" },
-	{ id: "stack", number: "04", label: "The Stack" },
-	{ id: "time", number: "05", label: "Your Time" },
-] as const;
-
-type SectionId = (typeof sections)[number]["id"];
-
-function OverviewSection() {
+export function OverviewSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -265,7 +239,7 @@ function OverviewSection() {
 	);
 }
 
-function PrinciplesSection() {
+export function PrinciplesSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -304,7 +278,7 @@ function ActorBadge({ actor }: { actor: FlowActor }) {
 	);
 }
 
-function FlowSection() {
+export function FlowSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -371,7 +345,7 @@ function FlowSection() {
 	);
 }
 
-function StackSection() {
+export function StackSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -403,7 +377,7 @@ function StackSection() {
 	);
 }
 
-function TimeSection() {
+export function TimeSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -432,18 +406,9 @@ function TimeSection() {
 	);
 }
 
-const sectionContent: Record<SectionId, () => React.ReactNode> = {
-	overview: OverviewSection,
-	principles: PrinciplesSection,
-	flow: FlowSection,
-	stack: StackSection,
-	time: TimeSection,
-};
-
-function TechnicalVision() {
-	const [active, setActive] = useState<SectionId>("overview");
-	const ActiveSection = sectionContent[active];
-
+// Page shell without the in-page section nav — in Storybook the sidebar is
+// the navigation, with one story per section.
+export function VisionFrame({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="relative flex h-svh flex-col overflow-hidden bg-background text-foreground">
 			<Threads
@@ -455,12 +420,12 @@ function TechnicalVision() {
 			/>
 			<header className="relative z-10 bg-background/80 backdrop-blur">
 				<div className="flex h-20 items-center gap-3 px-4 sm:px-6 lg:h-24 lg:px-12">
-					<Link to="/technical-vision" className="flex items-center gap-2">
+					<div className="flex items-center gap-2">
 						<div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
 							<Scale className="size-4" />
 						</div>
 						<span className="text-sm font-semibold">MatterWorks</span>
-					</Link>
+					</div>
 				</div>
 			</header>
 
@@ -473,36 +438,10 @@ function TechnicalVision() {
 						<p className="mt-1 text-lg font-semibold text-foreground/70">
 							Agentic Law Firm
 						</p>
-						<nav
-							aria-label="Sections"
-							className="mt-10 flex flex-col items-start gap-3"
-						>
-							{sections.map((section) => (
-								<button
-									key={section.id}
-									type="button"
-									onClick={() => setActive(section.id)}
-									aria-current={active === section.id ? "true" : undefined}
-									className={`cursor-pointer text-left text-4xl font-extrabold uppercase leading-none tracking-tight transition-colors sm:text-5xl ${
-										active === section.id
-											? "text-indigo-600 dark:text-indigo-400"
-											: "text-foreground hover:text-indigo-600 dark:hover:text-indigo-400"
-									}`}
-								>
-									{section.label}
-									<sup className="ml-1 align-super text-sm font-semibold tracking-normal text-indigo-600 dark:text-indigo-400">
-										{section.number}
-									</sup>
-								</button>
-							))}
-						</nav>
 					</div>
 					<div className="min-h-0 overflow-y-auto">
-						<div
-							key={active}
-							className="animate-in fade-in slide-in-from-bottom-2 max-w-4xl px-4 py-12 duration-300 sm:px-6 sm:py-16 lg:px-12"
-						>
-							<ActiveSection />
+						<div className="animate-in fade-in slide-in-from-bottom-2 max-w-4xl px-4 py-12 duration-300 sm:px-6 sm:py-16 lg:px-12">
+							{children}
 						</div>
 					</div>
 				</div>

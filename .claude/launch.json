@@ -16,6 +16,12 @@
 				"3100"
 			],
 			"port": 3100
+		},
+		{
+			"name": "storybook",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["storybook", "--no-open"],
+			"port": 6006
 		}
 	]
 }

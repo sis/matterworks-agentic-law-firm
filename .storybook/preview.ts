@@ -3,6 +3,11 @@ import '../src/styles.css'
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Technical Vision', '*'],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

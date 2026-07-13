@@ -9,17 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TechnicalVisionRouteImport } from './routes/technical-vision'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
 import { Route as AppNewRequestRouteImport } from './routes/_app.new-request'
 import { Route as AppAboutRouteImport } from './routes/_app.about'
 
-const TechnicalVisionRoute = TechnicalVisionRouteImport.update({
-  id: '/technical-vision',
-  path: '/technical-vision',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -42,12 +36,10 @@ const AppAboutRoute = AppAboutRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
-  '/technical-vision': typeof TechnicalVisionRoute
   '/about': typeof AppAboutRoute
   '/new-request': typeof AppNewRequestRoute
 }
 export interface FileRoutesByTo {
-  '/technical-vision': typeof TechnicalVisionRoute
   '/about': typeof AppAboutRoute
   '/new-request': typeof AppNewRequestRoute
   '/': typeof AppIndexRoute
@@ -55,39 +47,24 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
-  '/technical-vision': typeof TechnicalVisionRoute
   '/_app/about': typeof AppAboutRoute
   '/_app/new-request': typeof AppNewRequestRoute
   '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/technical-vision' | '/about' | '/new-request'
+  fullPaths: '/' | '/about' | '/new-request'
   fileRoutesByTo: FileRoutesByTo
-  to: '/technical-vision' | '/about' | '/new-request' | '/'
-  id:
-    | '__root__'
-    | '/_app'
-    | '/technical-vision'
-    | '/_app/about'
-    | '/_app/new-request'
-    | '/_app/'
+  to: '/about' | '/new-request' | '/'
+  id: '__root__' | '/_app' | '/_app/about' | '/_app/new-request' | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
-  TechnicalVisionRoute: typeof TechnicalVisionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/technical-vision': {
-      id: '/technical-vision'
-      path: '/technical-vision'
-      fullPath: '/technical-vision'
-      preLoaderRoute: typeof TechnicalVisionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -135,17 +112,15 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
-  TechnicalVisionRoute: TechnicalVisionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+
+declare module '@tanstack/react-router' {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    router: ReturnType<typeof getRouter>
   }
 }
