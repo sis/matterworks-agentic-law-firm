@@ -1,6 +1,8 @@
 import type { ConvexQueryClient } from "@convex-dev/react-query";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
+import AppShell from "#/components/app-shell";
+import AuthGate from "#/integrations/clerk/auth-gate";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -26,5 +28,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootLayout() {
-	return <Outlet />;
+	return (
+		<AuthGate>
+			<AppShell>
+				<Outlet />
+			</AppShell>
+		</AuthGate>
+	);
 }

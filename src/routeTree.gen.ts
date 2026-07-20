@@ -9,109 +9,104 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AppRouteImport } from './routes/_app'
-import { Route as AppIndexRouteImport } from './routes/_app.index'
-import { Route as AppNewRequestRouteImport } from './routes/_app.new-request'
-import { Route as AppAboutRouteImport } from './routes/_app.about'
+import { Route as NewRequestRouteImport } from './routes/new-request'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
 
-const AppRoute = AppRouteImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppIndexRoute = AppIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppNewRequestRoute = AppNewRequestRouteImport.update({
+const NewRequestRoute = NewRequestRouteImport.update({
   id: '/new-request',
   path: '/new-request',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppAboutRoute = AppAboutRouteImport.update({
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AppIndexRoute
-  '/about': typeof AppAboutRoute
-  '/new-request': typeof AppNewRequestRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/new-request': typeof NewRequestRoute
 }
 export interface FileRoutesByTo {
-  '/about': typeof AppAboutRoute
-  '/new-request': typeof AppNewRequestRoute
-  '/': typeof AppIndexRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/new-request': typeof NewRequestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_app': typeof AppRouteWithChildren
-  '/_app/about': typeof AppAboutRoute
-  '/_app/new-request': typeof AppNewRequestRoute
-  '/_app/': typeof AppIndexRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/new-request': typeof NewRequestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/new-request'
+  fullPaths: '/' | '/about' | '/features' | '/new-request'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/new-request' | '/'
-  id: '__root__' | '/_app' | '/_app/about' | '/_app/new-request' | '/_app/'
+  to: '/' | '/about' | '/features' | '/new-request'
+  id: '__root__' | '/' | '/about' | '/features' | '/new-request'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  FeaturesRoute: typeof FeaturesRoute
+  NewRequestRoute: typeof NewRequestRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_app/': {
-      id: '/_app/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/new-request': {
-      id: '/_app/new-request'
+    '/new-request': {
+      id: '/new-request'
       path: '/new-request'
       fullPath: '/new-request'
-      preLoaderRoute: typeof AppNewRequestRouteImport
-      parentRoute: typeof AppRoute
+      preLoaderRoute: typeof NewRequestRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/about': {
-      id: '/_app/about'
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AppAboutRouteImport
-      parentRoute: typeof AppRoute
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AppRouteChildren {
-  AppAboutRoute: typeof AppAboutRoute
-  AppNewRequestRoute: typeof AppNewRequestRoute
-  AppIndexRoute: typeof AppIndexRoute
-}
-
-const AppRouteChildren: AppRouteChildren = {
-  AppAboutRoute: AppAboutRoute,
-  AppNewRequestRoute: AppNewRequestRoute,
-  AppIndexRoute: AppIndexRoute,
-}
-
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
-  AppRoute: AppRouteWithChildren,
+  IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  FeaturesRoute: FeaturesRoute,
+  NewRequestRoute: NewRequestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -38,4 +38,21 @@ export default defineSchema({
     text: v.string(),
     completed: v.boolean(),
   }),
+  features: defineTable({
+    title: v.string(),
+    description: v.optional(v.string()),
+    position: v.number(),
+    createdBy: v.id('users'),
+  }).index('by_position', ['position']),
+  featureVotes: defineTable({
+    featureId: v.id('features'),
+    userId: v.id('users'),
+  })
+    .index('by_feature', ['featureId'])
+    .index('by_feature_user', ['featureId', 'userId']),
+  featureComments: defineTable({
+    featureId: v.id('features'),
+    userId: v.id('users'),
+    text: v.string(),
+  }).index('by_feature', ['featureId']),
 })
