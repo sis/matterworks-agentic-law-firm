@@ -1,16 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
+	EngineSection,
 	FlowSection,
+	HandsSection,
+	MichaelSection,
+	OurTimeSection,
 	OverviewSection,
-	PrinciplesSection,
+	PositionSection,
 	StackSection,
 	TimeSection,
 	VisionFrame,
 } from "./technical-vision";
 
 const meta = {
-	title: "Technical Vision",
+	title: "The Pitch",
 	parameters: {
 		layout: "fullscreen",
 	},
@@ -27,16 +31,26 @@ export const Overview: Story = {
 	),
 };
 
-export const Principles: Story = {
+export const WhatIsIt: Story = {
+	name: "What Is It?",
 	render: () => (
 		<VisionFrame>
-			<PrinciplesSection />
+			<HandsSection />
 		</VisionFrame>
 	),
 };
 
-export const TheFlow: Story = {
-	name: "The Flow",
+export const TheEngine: Story = {
+	name: "The Engine",
+	render: () => (
+		<VisionFrame>
+			<EngineSection />
+		</VisionFrame>
+	),
+};
+
+export const ExampleCase: Story = {
+	name: "An Example Case",
 	render: () => (
 		<VisionFrame>
 			<FlowSection />
@@ -53,11 +67,38 @@ export const TheStack: Story = {
 	),
 };
 
+export const ForMichael: Story = {
+	name: "For Michael",
+	render: () => (
+		<VisionFrame>
+			<MichaelSection />
+		</VisionFrame>
+	),
+};
+
 export const YourTime: Story = {
 	name: "Your Time",
 	render: () => (
 		<VisionFrame>
 			<TimeSection />
+		</VisionFrame>
+	),
+};
+
+export const OurTime: Story = {
+	name: "Our Time",
+	render: () => (
+		<VisionFrame>
+			<OurTimeSection />
+		</VisionFrame>
+	),
+};
+
+export const UniquelyPositioned: Story = {
+	name: "Why Are We Uniquely Positioned?",
+	render: () => (
+		<VisionFrame>
+			<PositionSection />
 		</VisionFrame>
 	),
 };

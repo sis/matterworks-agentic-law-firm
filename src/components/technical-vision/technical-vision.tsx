@@ -1,52 +1,39 @@
 import {
+	Activity,
+	Anchor,
 	AppWindow,
 	ArrowDown,
-	Atom,
+	ArrowUp,
+	Blocks,
+	BookOpen,
+	Bot,
 	Brain,
 	Cloud,
-	Compass,
+	Cpu,
 	Database,
 	FileText,
-	Handshake,
+	Gauge,
+	Globe,
+	Hammer,
 	Inbox,
 	Library,
 	Mail,
-	MessagesSquare,
+	Megaphone,
 	PenLine,
-	Rocket,
+	Presentation,
+	Puzzle,
+	RefreshCw,
+	Repeat,
 	Scale,
 	Search,
 	Send,
-	Zap,
+	Server,
+	Table,
+	Users,
+	Wand2,
+	Waves,
 } from "lucide-react";
 import Threads from "../ui/threads";
-
-const principles = [
-	{
-		icon: Zap,
-		title: "Minimum touchpoints",
-		description:
-			"We will automate everything that can possibly be automated. You'll be wrapped in a cocoon of automation: you exist in the process only where you're genuinely required, and every touchpoint you do have is optimised for your speed.",
-	},
-	{
-		icon: MessagesSquare,
-		title: "Constant collaboration",
-		description:
-			"We will be in constant collaboration with you. We will live and breathe what you need, and the platform adapts to it — continuously, not in quarterly releases.",
-	},
-	{
-		icon: Atom,
-		title: "Atomic iterations",
-		description:
-			"We will make quick, precise updates with lawyers in the loop, so feedback turns into change fast. Small, safe steps shipped constantly — not big releases you have to wait for.",
-	},
-	{
-		icon: Rocket,
-		title: "Latest and greatest tech",
-		description:
-			"Frontier AI models, and the leading developer tools that traditional law firms are afraid to touch. If something better exists, we use it.",
-	},
-];
 
 const flowActors = {
 	client: { label: "Client", className: "border text-foreground" },
@@ -188,7 +175,7 @@ const timeProtections = [
 	},
 	{
 		icon: PenLine,
-		title: "First passes",
+		title: "Worked-through drafts",
 		description:
 			"Reviews and drafts arrive already worked through — produced by LLMs grounded in real data, precedents, and the client's own documents. Never from a blank page.",
 	},
@@ -200,69 +187,214 @@ const timeProtections = [
 	},
 ];
 
+const engineTraits = [
+	{
+		icon: Bot,
+		title: "Autonomous — it acts on its own",
+		description:
+			"The engine doesn't wait to be prompted. It picks up a matter the moment it lands, works through it step by step, checks its own output against the playbooks, decides what's routine and what needs a lawyer, and keeps going until there's something worth showing you.",
+	},
+	{
+		icon: BookOpen,
+		title: "Grounded in data and expertise",
+		description:
+			"Nothing is drafted or reviewed from thin air. Every piece of work is grounded in the firm's own data and the expertise its lawyers have built up over time: playbooks, precedents, past matters, and the things we always check.",
+	},
+	{
+		icon: Library,
+		title: "An option to shortcut with research platforms",
+		description:
+			"That body of knowledge takes years to build, and there is an option to shortcut it: established legal research platforms such as Westlaw and Bloomberg Law, and AI-native sources such as CoCounsel, can be plugged into the same retrieval layer. Whether and when we do that is a decision we make together.",
+	},
+	{
+		icon: RefreshCw,
+		title: "Learning as it goes",
+		description:
+			"The platform learns with every matter. Each lawyer edit, each flagged clause, each outcome feeds back into the knowledge base — so future drafting and review starts from where the last one finished, not from scratch.",
+	},
+];
+
+const michaelComparison = [
+	{
+		icon: Database,
+		title: "Context is fed in automatically",
+		description:
+			"Everything around the matter — the client, the documents, the history, the playbooks — is already in front of the agent. No dragging files in, no re-explaining the case.",
+	},
+	{
+		icon: Wand2,
+		title: "No skills to manage",
+		description:
+			"The dozens of skills you maintain today become the platform's problem. We build, test, and keep them current; you just use them.",
+	},
+	{
+		icon: Users,
+		title: "Collaborative, not first-pass-and-trawl",
+		description:
+			"Instead of the agent doing one pass and leaving you to wade through the output, it works with you: flagging what matters, explaining why, and redoing sections on request.",
+	},
+];
+
+const whyNow = [
+	{
+		icon: Brain,
+		title: "The models just crossed the line",
+		description:
+			"Frontier models now read a full lease, hold the whole matter in context, and produce a markup a senior lawyer recognises as competent. Two years ago they couldn't. The question has moved from “can it?” to “who builds the firm around it first?”",
+	},
+	{
+		icon: Anchor,
+		title: "Big law can't move",
+		description:
+			"The legal industry runs on inertia. An established firm that wants to take advantage of these advances has to fight process, precedent, and political battles at every level — partners, committees, IT, risk, the billing model itself. A brand new firm has none of that. It can be built around the technology from day one, not retrofitted to it.",
+	},
+	{
+		icon: Waves,
+		title: "The tide is already turning",
+		description:
+			"Agentic law firms are starting to appear — licensed, taking clients, proving the model works. None of them is in this vertical yet. Real estate is document-heavy, playbook-driven, and wide open.",
+	},
+	{
+		icon: Puzzle,
+		title: "The right blend, in one vertical",
+		description:
+			"Taking advantage of this needs people who build and run agentic systems and people who practise law at a high level — in the same room, on the same problem. We have that blend, and we're pointing it at one vertical, real estate, rather than trying to do all of law at once.",
+	},
+];
+
+const ourTime = [
+	{
+		icon: Hammer,
+		title: "Building it in the first place",
+		description:
+			"There is a lot of upfront work before the first matter runs: intake, the Word and Outlook integrations, document search, the playbook engine, escalation logic, security and data governance. Months of build — ours, not yours.",
+	},
+	{
+		icon: Server,
+		title: "Keeping it running",
+		description:
+			"All of this is infrastructure, and infrastructure needs looking after: storage, search, models, security, backups, access, costs, and the upgrades that never stop arriving. That maintenance is constant and it's on us.",
+	},
+	{
+		icon: Activity,
+		title: "Improving it from every matter",
+		description:
+			"Each review and draft tells us something: where the agent hesitated, where you overrode it, where a step took too long. Better playbooks, sharper prompts, tighter escalation, new document types — the list never gets shorter.",
+	},
+	{
+		icon: Repeat,
+		title: "Shipping continuously",
+		description:
+			"Improvements land in days, not release cycles. Tell us on Monday that a clause keeps getting missed; by Wednesday the playbook catches it.",
+	},
+	{
+		icon: Gauge,
+		title: "Measuring, not assuming",
+		description:
+			"We track where lawyer time actually goes and what the agent gets right. If a number isn't moving in the right direction, that's what we work on next.",
+	},
+	{
+		icon: Megaphone,
+		title: "Go-to-market and sales",
+		description:
+			"Matters don't arrive on their own. We work on positioning, pricing, pipeline, and the conversations that bring clients in — so the work is there for the platform to do.",
+	},
+];
+
+const familiarTools = [
+	{ icon: Globe, name: "Platform Website", optional: false },
+	{ icon: Mail, name: "Outlook", optional: false },
+	{ icon: FileText, name: "Word", optional: false },
+	{ icon: Presentation, name: "PowerPoint", optional: true },
+	{ icon: Table, name: "Excel", optional: true },
+];
+
+const handsLayers = [
+	{
+		icon: AppWindow,
+		title: "The tools you already use",
+		description:
+			"Outlook and Word, exactly as they are today. If there's anything else you like to work in — PowerPoint, Excel, something else — that too. Nothing new to learn, no new editor to fight.",
+	},
+	{
+		icon: Blocks,
+		title: "A platform that lives in them and stands alone",
+		description:
+			"The platform shows up inside Word and Outlook where you're already working, and also exists as its own app for the things that don't belong in a document or an inbox: the matter list, the queue, the history.",
+	},
+	{
+		icon: Cpu,
+		title: "An engine in the background",
+		description:
+			"Underneath both, an engine that reads from everything — documents, emails, playbooks, precedents, past matters — and works autonomously in an agentic fashion. It doesn't wait to be asked; it's already working when you open the file.",
+	},
+];
+
+const overviewQuestions = [
+	"What are we providing you?",
+	"Is it good?",
+	"Are we just going to build something and collect money from your hard work?",
+	"Why are we uniquely positioned?",
+	"How is this different from what Michael is currently doing alone?",
+];
+
 export function OverviewSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-				What this page is
+				Overview
 			</h2>
-			<div className="mt-8 grid gap-8">
-				<div className="flex gap-4">
-					<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-						<Handshake className="size-4" />
-					</div>
-					<div>
-						<h3 className="text-lg font-semibold">Why this vision exists</h3>
-						<p className="mt-2 text-base text-foreground/80">
-							This page sets out openly what we at MatterWorks are building and
-							why, so that lawyers considering the platform know exactly what to
-							expect — before anything is asked of them.
-						</p>
-					</div>
-				</div>
-				<div className="flex gap-4">
-					<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-						<Compass className="size-4" />
-					</div>
-					<div>
-						<h3 className="text-lg font-semibold">
-							It also happens to be our north star
-						</h3>
-						<p className="mt-2 text-base text-foreground/80">
-							The same picture guides how and what gets developed. If a feature
-							doesn't serve the vision on this page, it doesn't get built.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-export function PrinciplesSection() {
-	return (
-		<div>
-			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-				How we will build
-			</h2>
-			<ol className="mt-8 grid gap-8 xl:grid-cols-2">
-				{principles.map((principle, index) => (
-					<li key={principle.title} className="flex gap-4">
-						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-							<principle.icon className="size-4" />
-						</div>
-						<div>
-							<span className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
-								Principle {index + 1}
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				This page sets out openly what we at Basis Legal are building and why.
+				It answers five questions we believe you care the most about.
+			</p>
+			<ol className="mt-8 grid gap-4">
+				{overviewQuestions.map((question, index) => (
+					<li
+						key={question}
+						className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm"
+					>
+						<div className="flex items-start gap-4">
+							<span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-sm font-semibold text-primary">
+								{index + 1}
 							</span>
-							<h3 className="mt-1 text-lg font-semibold">{principle.title}</h3>
-							<p className="mt-2 text-base text-foreground/80">
-								{principle.description}
-							</p>
+							<div className="min-w-0 flex-1">
+								<h3 className="text-lg font-semibold">{question}</h3>
+							</div>
 						</div>
 					</li>
 				))}
 			</ol>
+		</div>
+	);
+}
+
+export function PositionSection() {
+	return (
+		<div>
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+				Why are we uniquely positioned?
+			</h2>
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				The technology can now do the work, the incumbents can't reorganise
+				around it, the first movers are proving it — and we have the team to do
+				it in one vertical.
+			</p>
+			<div className="mt-8 grid gap-8">
+				{whyNow.map((item) => (
+					<div key={item.title} className="flex gap-4">
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+							<item.icon className="size-4" />
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold">{item.title}</h3>
+							<p className="mt-2 text-base text-foreground/80">
+								{item.description}
+							</p>
+						</div>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }
@@ -282,7 +414,7 @@ export function FlowSection() {
 	return (
 		<div>
 			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-				A matter, end to end
+				An example case
 			</h2>
 			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
 				Badges show who — or what — handles each step. The worked example
@@ -345,6 +477,126 @@ export function FlowSection() {
 	);
 }
 
+function HandsDiagram() {
+	return (
+		<div className="mt-8 rounded-xl border bg-card p-5 text-card-foreground shadow-sm sm:p-6">
+			<div className="grid gap-0 sm:grid-cols-[7rem_1fr]">
+				<div className="hidden items-center sm:flex">
+					<span className="text-xs font-semibold uppercase tracking-wide text-foreground/60">
+						You
+					</span>
+				</div>
+				<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+					{familiarTools.map((tool) => (
+						<div
+							key={tool.name}
+							className={`flex flex-col items-center rounded-lg border p-3 text-center ${
+								tool.optional ? "border-dashed" : "bg-background"
+							}`}
+						>
+							<tool.icon className="size-5 text-primary" />
+							<span className="mt-2 text-sm font-semibold">{tool.name}</span>
+							{tool.optional && (
+								<span className="mt-0.5 text-xs text-muted-foreground">
+									if you want it
+								</span>
+							)}
+						</div>
+					))}
+				</div>
+
+				<div className="hidden sm:block" />
+				<div className="flex items-center justify-center gap-1 py-2 text-muted-foreground">
+					<ArrowUp className="size-4" />
+					<ArrowDown className="size-4" />
+				</div>
+
+				<div className="hidden items-center sm:flex">
+					<span className="text-xs font-semibold uppercase tracking-wide text-foreground/60">
+						Platform
+					</span>
+				</div>
+				<div className="grid gap-3 md:grid-cols-2">
+					<div className="rounded-lg border bg-secondary p-4 text-secondary-foreground">
+						<div className="flex items-center gap-2">
+							<Blocks className="size-4" />
+							<span className="text-sm font-semibold">
+								Inside Word &amp; Outlook
+							</span>
+						</div>
+						<p className="mt-1 text-sm opacity-80">
+							Markups, summaries, and next steps appear in the document and the
+							email thread.
+						</p>
+					</div>
+					<div className="rounded-lg border bg-secondary p-4 text-secondary-foreground">
+						<div className="flex items-center gap-2">
+							<AppWindow className="size-4" />
+							<span className="text-sm font-semibold">Standalone app</span>
+						</div>
+						<p className="mt-1 text-sm opacity-80">
+							Matters, the queue, history, and everything that isn't a document.
+						</p>
+					</div>
+				</div>
+
+				<div className="hidden sm:block" />
+				<div className="flex items-center justify-center py-2 text-muted-foreground">
+					<ArrowUp className="size-4" />
+				</div>
+
+				<div className="hidden items-center sm:flex">
+					<span className="text-xs font-semibold uppercase tracking-wide text-foreground/60">
+						Engine
+					</span>
+				</div>
+				<div className="rounded-lg bg-primary p-4 text-primary-foreground">
+					<div className="flex items-center gap-2">
+						<Cpu className="size-4" />
+						<span className="text-sm font-semibold">
+							Autonomous agentic engine
+						</span>
+					</div>
+					<p className="mt-1 text-sm opacity-90">
+						Reads from everything: documents, email, playbooks, precedents, past
+						matters. Works in the background, on its own, and surfaces results
+						where you are.
+					</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function HandsSection() {
+	return (
+		<div>
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+				What is it?
+			</h2>
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				Three layers. You only ever touch the top one.
+			</p>
+			<HandsDiagram />
+			<div className="mt-8 grid gap-8">
+				{handsLayers.map((item) => (
+					<div key={item.title} className="flex gap-4">
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+							<item.icon className="size-4" />
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold">{item.title}</h3>
+							<p className="mt-2 text-base text-foreground/80">
+								{item.description}
+							</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
 export function StackSection() {
 	return (
 		<div>
@@ -368,6 +620,35 @@ export function StackSection() {
 							</h3>
 							<p className="mt-2 text-base text-foreground/80">
 								{tech.description}
+							</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
+export function EngineSection() {
+	return (
+		<div>
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+				The Engine
+			</h2>
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				What runs underneath everything: how it works on its own, what it knows,
+				and how that knowledge compounds.
+			</p>
+			<div className="mt-8 grid gap-8">
+				{engineTraits.map((item) => (
+					<div key={item.title} className="flex gap-4">
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+							<item.icon className="size-4" />
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold">{item.title}</h3>
+							<p className="mt-2 text-base text-foreground/80">
+								{item.description}
 							</p>
 						</div>
 					</div>
@@ -406,6 +687,64 @@ export function TimeSection() {
 	);
 }
 
+export function OurTimeSection() {
+	return (
+		<div>
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+				Our time
+			</h2>
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				Your time is protected; ours is spent. There's a lot of work to get this
+				going, a lot to keep it running, no end to making it better — and on top
+				of that, bringing the clients in. We won't be sitting on our hands.
+			</p>
+			<div className="mt-8 grid gap-8 xl:grid-cols-2">
+				{ourTime.map((item) => (
+					<div key={item.title} className="flex gap-4">
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+							<item.icon className="size-4" />
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold">{item.title}</h3>
+							<p className="mt-2 text-base text-foreground/80">
+								{item.description}
+							</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
+export function MichaelSection() {
+	return (
+		<div>
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+				For Michael
+			</h2>
+			<p className="mt-3 max-w-2xl text-lg text-foreground/80">
+				How this compares to your current flow.
+			</p>
+			<div className="mt-8 grid gap-8">
+				{michaelComparison.map((item) => (
+					<div key={item.title} className="flex gap-4">
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+							<item.icon className="size-4" />
+						</div>
+						<div>
+							<h3 className="text-lg font-semibold">{item.title}</h3>
+							<p className="mt-2 text-base text-foreground/80">
+								{item.description}
+							</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
 // Page shell without the in-page section nav — in Storybook the sidebar is
 // the navigation, with one story per section.
 export function VisionFrame({ children }: { children: React.ReactNode }) {
@@ -424,7 +763,7 @@ export function VisionFrame({ children }: { children: React.ReactNode }) {
 						<div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
 							<Scale className="size-4" />
 						</div>
-						<span className="text-sm font-semibold">MatterWorks</span>
+						<span className="text-sm font-semibold">Basis Legal</span>
 					</div>
 				</div>
 			</header>
@@ -432,9 +771,7 @@ export function VisionFrame({ children }: { children: React.ReactNode }) {
 			<main className="relative z-10 min-h-0 w-full flex-1">
 				<div className="grid h-full grid-rows-[auto_1fr] lg:grid-cols-[minmax(320px,440px)_1fr] lg:grid-rows-1">
 					<div className="px-4 pt-12 sm:px-6 sm:pt-16 lg:pl-12 lg:pr-8">
-						<h1 className="text-3xl font-bold tracking-tight">
-							Technical Vision
-						</h1>
+						<h1 className="text-3xl font-bold tracking-tight">The Pitch</h1>
 						<p className="mt-1 text-lg font-semibold text-foreground/70">
 							Agentic Law Firm
 						</p>
